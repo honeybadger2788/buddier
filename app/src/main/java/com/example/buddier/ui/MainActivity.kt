@@ -7,6 +7,7 @@ import android.view.View.OnClickListener
 import com.example.buddier.R
 import com.example.buddier.databinding.ActivityMainBinding
 import com.example.buddier.ui.loginActivity.LoginActivity
+import com.example.buddier.ui.signupActivity.SignupActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -19,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         with(binding){
             btnLogin.setOnClickListener{
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            }
+
+            btnSignup.setOnClickListener {
+                startActivity(Intent(this@MainActivity, SignupActivity::class.java))
             }
         }
     }
