@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.buddier.R
 import com.example.buddier.databinding.ActivityLoginBinding
 import com.example.buddier.databinding.ActivityMainBinding
+import com.example.buddier.ui.homeActivity.HomeActivity
 import com.example.buddier.ui.signupActivity.SignupActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -18,6 +19,9 @@ class LoginActivity : AppCompatActivity() {
         with(binding) {
             btnSignup.setOnClickListener {
                 startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+            }
+            btnLogin.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
             }
         }
     }
