@@ -1,4 +1,4 @@
-package com.example.buddier.ui.buddy
+package com.example.buddier.ui.homeActivity
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +9,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buddier.R
 import com.bumptech.glide.Glide
+import com.example.buddier.ui.homeActivity.model.PetModel
 
 class CardStackAdapter(
-    private var spots: List<Spot> = emptyList()
+    private var pets: List<PetModel> = emptyList()
 ) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,27 +21,27 @@ class CardStackAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val spot = spots[position]
-        holder.name.text = spot.name
-        holder.description.text = spot.description
+        val pet = pets[position]
+        holder.name.text = "${pet.name}, ${pet.age} years old"
+        holder.description.text = pet.description
         Glide.with(holder.image)
-            .load(spot.url)
+            .load(pet.url)
             .into(holder.image)
         holder.itemView.setOnClickListener { v ->
-            Toast.makeText(v.context, spot.name, Toast.LENGTH_SHORT).show()
+            Toast.makeText(v.context, pet.name, Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun getItemCount(): Int {
-        return spots.size
+        return pets.size
     }
 
-    fun setSpots(spots: List<Spot>) {
-        this.spots = spots
+    fun setSpots(petModels: List<PetModel>) {
+        this.pets = petModels
     }
 
-    fun getSpots(): List<Spot> {
-        return spots
+    fun getSpots(): List<PetModel> {
+        return pets
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -13,13 +13,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import com.example.buddier.R
-import com.example.buddier.ui.buddy.CardStackAdapter
-import com.example.buddier.ui.buddy.Spot
-import com.example.buddier.ui.buddy.SpotDiffCallback
+import com.example.buddier.databinding.ActivityHomeBinding
+import com.example.buddier.ui.homeActivity.model.PetModel
 import com.google.android.material.navigation.NavigationView
 import com.yuyakaido.android.cardstackview.*
 
 class HomeActivity: AppCompatActivity(), CardStackListener {
+    private lateinit var binding: ActivityHomeBinding
 
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout) }
     private val cardStackView by lazy { findViewById<CardStackView>(R.id.card_stack_view) }
@@ -28,7 +28,8 @@ class HomeActivity: AppCompatActivity(), CardStackListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupNavigation()
         setupCardStackView()
         setupButton()
@@ -77,12 +78,6 @@ class HomeActivity: AppCompatActivity(), CardStackListener {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.reload -> reload()
-                R.id.add_spot_to_first -> addFirst(1)
-                R.id.add_spot_to_last -> addLast(1)
-                R.id.remove_spot_from_first -> removeFirst(1)
-                R.id.remove_spot_from_last -> removeLast(1)
-                R.id.replace_first_spot -> replace()
-                R.id.swap_first_for_last -> swap()
             }
             drawerLayout.closeDrawers()
             true
@@ -167,114 +162,18 @@ class HomeActivity: AppCompatActivity(), CardStackListener {
         result.dispatchUpdatesTo(adapter)
     }
 
-    private fun addFirst(size: Int) {
-        val old = adapter.getSpots()
-        val new = mutableListOf<Spot>().apply {
-            addAll(old)
-            for (i in 0 until size) {
-                add(manager.topPosition, createSpot())
-            }
-        }
-        val callback = SpotDiffCallback(old, new)
-        val result = DiffUtil.calculateDiff(callback)
-        adapter.setSpots(new)
-        result.dispatchUpdatesTo(adapter)
-    }
-
-    private fun addLast(size: Int) {
-        val old = adapter.getSpots()
-        val new = mutableListOf<Spot>().apply {
-            addAll(old)
-            addAll(List(size) { createSpot() })
-        }
-        val callback = SpotDiffCallback(old, new)
-        val result = DiffUtil.calculateDiff(callback)
-        adapter.setSpots(new)
-        result.dispatchUpdatesTo(adapter)
-    }
-
-    private fun removeFirst(size: Int) {
-        if (adapter.getSpots().isEmpty()) {
-            return
-        }
-
-        val old = adapter.getSpots()
-        val new = mutableListOf<Spot>().apply {
-            addAll(old)
-            for (i in 0 until size) {
-                removeAt(manager.topPosition)
-            }
-        }
-        val callback = SpotDiffCallback(old, new)
-        val result = DiffUtil.calculateDiff(callback)
-        adapter.setSpots(new)
-        result.dispatchUpdatesTo(adapter)
-    }
-
-    private fun removeLast(size: Int) {
-        if (adapter.getSpots().isEmpty()) {
-            return
-        }
-
-        val old = adapter.getSpots()
-        val new = mutableListOf<Spot>().apply {
-            addAll(old)
-            for (i in 0 until size) {
-                removeAt(this.size - 1)
-            }
-        }
-        val callback = SpotDiffCallback(old, new)
-        val result = DiffUtil.calculateDiff(callback)
-        adapter.setSpots(new)
-        result.dispatchUpdatesTo(adapter)
-    }
-
-    private fun replace() {
-        val old = adapter.getSpots()
-        val new = mutableListOf<Spot>().apply {
-            addAll(old)
-            removeAt(manager.topPosition)
-            add(manager.topPosition, createSpot())
-        }
-        adapter.setSpots(new)
-        adapter.notifyItemChanged(manager.topPosition)
-    }
-
-    private fun swap() {
-        val old = adapter.getSpots()
-        val new = mutableListOf<Spot>().apply {
-            addAll(old)
-            val first = removeAt(manager.topPosition)
-            val last = removeAt(this.size - 1)
-            add(manager.topPosition, last)
-            add(first)
-        }
-        val callback = SpotDiffCallback(old, new)
-        val result = DiffUtil.calculateDiff(callback)
-        adapter.setSpots(new)
-        result.dispatchUpdatesTo(adapter)
-    }
-
-    private fun createSpot(): Spot {
-        return Spot(
-            name = "Bengy",
-            description = "komondor",
-            url = "https://images.dog.ceo/breeds/komondor/n02105505_2886.jpg"
-        )
-    }
-
-    private fun createSpots(): List<Spot> {
-        val spots = ArrayList<Spot>()
-        spots.add(Spot(name = "Sasha", description = "groenendael", url = "https://images.dog.ceo/breeds/groenendael/n02105056_6338.jpg"))
-        spots.add(Spot(name = "Mark", description = "mastiff-bull", url = "https://images.dog.ceo/breeds/mastiff-bull/n02108422_1546.jpg"))
-        spots.add(Spot(name = "Forest", description = "redbone", url = "https://images.dog.ceo/breeds/redbone/n02090379_5326.jpg"))
-        spots.add(Spot(name = "Brooklyn", description = "terrier-bedlington", url = "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_356.jpg"))
-        spots.add(Spot(name = "Empire", description = "schnauzer-miniature", url = "https://images.dog.ceo/breeds/schnauzer-miniature/n02097047_2910.jpg"))
-        spots.add(Spot(name = "Liberty", description = "hound-blood", url = "https://images.dog.ceo/breeds/hound-blood/n02088466_6775.jpg"))
-        spots.add(Spot(name = "Louvre", description = "entlebucher", url = "https://images.dog.ceo/breeds/entlebucher/n02108000_364.jpg"))
-        spots.add(Spot(name = "Eiffel", description = "dhole", url = "https://images.dog.ceo/breeds/dhole/n02115913_1493.jpg"))
-        spots.add(Spot(name = "Ben", description = "redbone", url = "https://images.dog.ceo/breeds/redbone/n02090379_3445.jpg"))
-        spots.add(Spot(name = "China", description = "setter-gordon", url = "https://images.dog.ceo/breeds/setter-gordon/n02101006_1804.jpg"))
-        return spots
+    private fun createSpots(): List<PetModel> {
+        val petModels = ArrayList<PetModel>()
+        petModels.add(PetModel(name = "Sasha", age = 10, description = "groenendael", url = "https://images.dog.ceo/breeds/groenendael/n02105056_6338.jpg"))
+        petModels.add(PetModel(name = "Mark", age = 5,description = "mastiff-bull", url = "https://images.dog.ceo/breeds/mastiff-bull/n02108422_1546.jpg"))
+        petModels.add(PetModel(name = "Forest", age = 3,description = "redbone", url = "https://images.dog.ceo/breeds/redbone/n02090379_5326.jpg"))
+        petModels.add(PetModel(name = "Brooklyn", age = 4,description = "terrier-bedlington", url = "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_356.jpg"))
+        petModels.add(PetModel(name = "Empire", age = 3,description = "schnauzer-miniature", url = "https://images.dog.ceo/breeds/schnauzer-miniature/n02097047_2910.jpg"))
+        petModels.add(PetModel(name = "Liberty", age = 7,description = "hound-blood", url = "https://images.dog.ceo/breeds/hound-blood/n02088466_6775.jpg"))
+        petModels.add(PetModel(name = "Louvre", age = 2,description = "entlebucher", url = "https://images.dog.ceo/breeds/entlebucher/n02108000_364.jpg"))
+        petModels.add(PetModel(name = "Eiffel", age = 6,description = "dhole", url = "https://images.dog.ceo/breeds/dhole/n02115913_1493.jpg"))
+        petModels.add(PetModel(name = "Ben", age = 8,description = "redbone", url = "https://images.dog.ceo/breeds/redbone/n02090379_3445.jpg"))
+        petModels.add(PetModel(name = "China", age = 1,description = "setter-gordon", url = "https://images.dog.ceo/breeds/setter-gordon/n02101006_1804.jpg"))
+        return petModels
     }
 }
