@@ -3,9 +3,7 @@ package com.example.buddier.ui.loginActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.buddier.R
 import com.example.buddier.databinding.ActivityLoginBinding
-import com.example.buddier.databinding.ActivityMainBinding
 import com.example.buddier.ui.homeActivity.HomeActivity
 import com.example.buddier.ui.signupActivity.SignupActivity
 
@@ -18,11 +16,19 @@ class LoginActivity : AppCompatActivity() {
 
         with(binding) {
             btnSignup.setOnClickListener {
-                startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+                goToSignup()
             }
             btnLogin.setOnClickListener {
-                startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                goToHome()
             }
         }
+    }
+
+    private fun goToHome() {
+        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+    }
+
+    private fun goToSignup() {
+        startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
     }
 }

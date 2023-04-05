@@ -1,10 +1,8 @@
 package com.example.buddier.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View.OnClickListener
-import com.example.buddier.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.buddier.databinding.ActivityMainBinding
 import com.example.buddier.ui.loginActivity.LoginActivity
 import com.example.buddier.ui.signupActivity.SignupActivity
@@ -19,12 +17,20 @@ class MainActivity : AppCompatActivity() {
 
         with(binding){
             btnLogin.setOnClickListener{
-                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                goToLogin()
             }
 
             btnSignup.setOnClickListener {
-                startActivity(Intent(this@MainActivity, SignupActivity::class.java))
+                goToSignup()
             }
         }
+    }
+
+    private fun goToSignup() {
+        startActivity(Intent(this@MainActivity, SignupActivity::class.java))
+    }
+
+    private fun goToLogin() {
+        startActivity(Intent(this@MainActivity, LoginActivity::class.java))
     }
 }

@@ -1,10 +1,11 @@
-package com.example.buddier.ui.buddy
+package com.example.buddier.ui.homeActivity
 
 import androidx.recyclerview.widget.DiffUtil
+import com.example.buddier.ui.homeActivity.model.PetModel
 
 class SpotDiffCallback(
-    private val old: List<Spot>,
-    private val new: List<Spot>
+    private val old: List<PetModel>,
+    private val new: List<PetModel>
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
