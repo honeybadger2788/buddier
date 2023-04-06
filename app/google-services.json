@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "772496095958",
+    "project_id": "buddier-e8576",
+    "storage_bucket": "buddier-e8576.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772496095958:android:0167abc9259bb184c56777",
+        "android_client_info": {
+          "package_name": "com.example.buddier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772496095958-hrr25qmg4aqsfj1jqle4r8b2mhuitj8c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPU7y8Uba7FPeyLbK2y0-Le2oO_xJsXdI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772496095958-hrr25qmg4aqsfj1jqle4r8b2mhuitj8c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

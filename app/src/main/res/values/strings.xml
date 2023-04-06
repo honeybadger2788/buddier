@@ -4,4 +4,14 @@
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer</string>
     <string name="reload">Reload</string>
+    <string name="login_error_mail">El email no es válido</string>
+    <string name="login_error_password">Debe contener al menos 6 caracteres</string>
+    <string name="login_error_dialog_title">No hemos encontrado el usuario</string>
+    <string name="login_error_dialog_body">Verifique los datos o vuelva a intentarlo</string>
+    <string name="login_error_dialog_negative_action">Cancelar</string>
+    <string name="login_error_dialog_positive_action">Reintentar</string>
+    <string name="feature_coming_soon">Proximamente</string>
+    <string name="dialog_success_title">¡Demo completa!</string>
+    <string name="dialog_success_body">"Espero que te haya gustado este login usando buenas prácticas y buen rollo :) "</string>
+    <string name="dialog_success_positive">¡Gracias!</string>
 </resources>
