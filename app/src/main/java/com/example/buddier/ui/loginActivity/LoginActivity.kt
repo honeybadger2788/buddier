@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.buddier.databinding.ActivityLoginBinding
 import com.example.buddier.ui.homeActivity.HomeActivity
 import com.example.buddier.ui.signupActivity.SignupActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class LoginActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class LoginActivity: AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

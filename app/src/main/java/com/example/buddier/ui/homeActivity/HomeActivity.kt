@@ -15,9 +15,13 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.buddier.R
 import com.example.buddier.databinding.ActivityHomeBinding
 import com.example.buddier.ui.homeActivity.model.PetModel
+import com.example.buddier.ui.signupActivity.SignupViewModel
 import com.google.android.material.navigation.NavigationView
 import com.yuyakaido.android.cardstackview.*
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeActivity: AppCompatActivity(), CardStackListener {
     private lateinit var binding: ActivityHomeBinding
 
