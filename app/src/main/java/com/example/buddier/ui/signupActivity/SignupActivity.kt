@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.buddier.databinding.ActivitySignupBinding
 import com.example.buddier.ui.loginActivity.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignupActivity: AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
 
